@@ -8,6 +8,8 @@
 
 **Mentor:** Neela Santhosh Kumar,HR & Academic Head
 
+**Task 1 - EXPLORATORY DATA ANALYSIS (EDA)**
+
 **Overview of the Project**
 
 **Project:**
