@@ -1,0 +1,50 @@
+/*This code performs exploratory data analysis (EDA) on a sales dataset, creating visualizations to understand trends and distributions.It generates histograms for sales and customer satisfaction, box plots for quantity by product category and sales by payment type, and a heatmap to analyze correlations between numerical features.*/
+
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('Christmas_Sales_And_Trends.csv')
+
+df['Date'] = pd.to_datetime(df['Date'], format='%m/%d/%Y')
+
+# 1. Total Sales Distribution (Histogram)
+plt.figure(figsize=(10, 6))
+sns.histplot(df['TotalPrice'], kde=True, color='blue')
+plt.title('Distribution of Total Sales Price')
+plt.xlabel('Total Price')
+plt.ylabel('Frequency')
+plt.show()
+
+# 2. Quantity Distribution by Product Category (Box Plot)
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='Category', y='Quantity', data=df)
+plt.title('Quantity Distribution by Product Category')
+plt.xlabel('Product Category')
+plt.ylabel('Quantity Sold')
+plt.show()
+
+# 3. Correlation Heatmap (Numerical Features)
+numerical_columns = df.select_dtypes(include=['float64', 'int64']).columns
+correlation_matrix = df[numerical_columns].corr()
+
+plt.figure(figsize=(10, 6))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', linewidths=0.5)
+plt.title('Correlation Heatmap')
+plt.show()
+
+# 4. Customer Satisfaction Distribution (Histogram)
+plt.figure(figsize=(10, 6))
+sns.histplot(df['CustomerSatisfaction'], bins=5, kde=True, color='green')
+plt.title('Customer Satisfaction Distribution')
+plt.xlabel('Customer Satisfaction')
+plt.ylabel('Frequency')
+plt.show()
+
+# 5. Sales Distribution by Payment Type (Box Plot)
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='PaymentType', y='TotalPrice', data=df)
+plt.title('Sales Distribution by Payment Type')
+plt.xlabel('Payment Type')
+plt.ylabel('Total Sales Price')
+plt.show()
